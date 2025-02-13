@@ -1,5 +1,3 @@
-# functions.py
-
 def infix_to_rpn(expression):
     """Преобразует инфиксное выражение в обратную польскую запись (ОПЗ)."""
     output_string = []

@@ -1,4 +1,3 @@
-# calculator.py
 from functions import infix_to_rpn, evaluate_rpn
 import re
 

@@ -1,22 +1,169 @@
-# main.py
-from calculator import Calculator
+import sys
+from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QApplication, QMainWindow
+from calculator import Calculator  # Импортируем класс Calculator
 
-def main():
-    calc = Calculator()  # Создаем экземпляр калькулятора
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(617, 267)
+        self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setObjectName("gridLayout")
+        self.label = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 4)
+        self.btn_sub = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_sub.setObjectName("btn_sub")
+        self.gridLayout.addWidget(self.btn_sub, 3, 3, 1, 1)
+        self.btn_dot = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_dot.setObjectName("btn_dot")
+        self.gridLayout.addWidget(self.btn_dot, 8, 2, 1, 1)
+        self.btn_9 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_9.setObjectName("btn_9")
+        self.gridLayout.addWidget(self.btn_9, 2, 2, 1, 1)
+        self.btn_4 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_4.setObjectName("btn_4")
+        self.gridLayout.addWidget(self.btn_4, 3, 0, 1, 1)
+        self.btn_1 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_1.setObjectName("btn_1")
+        self.gridLayout.addWidget(self.btn_1, 4, 0, 1, 1)
+        self.btn_7 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_7.setObjectName("btn_7")
+        self.gridLayout.addWidget(self.btn_7, 2, 0, 1, 1)
+        self.btn_add = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_add.setObjectName("btn_add")
+        self.gridLayout.addWidget(self.btn_add, 2, 3, 1, 1)
+        self.btn_2 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_2.setObjectName("btn_2")
+        self.gridLayout.addWidget(self.btn_2, 4, 1, 1, 1)
+        self.btn_6 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_6.setObjectName("btn_6")
+        self.gridLayout.addWidget(self.btn_6, 3, 2, 1, 1)
+        self.btn_mul = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_mul.setObjectName("btn_mul")
+        self.gridLayout.addWidget(self.btn_mul, 4, 3, 1, 1)
+        self.btn_div = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_div.setObjectName("btn_div")
+        self.gridLayout.addWidget(self.btn_div, 8, 3, 1, 1)
+        self.btn_rparen = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_rparen.setObjectName("btn_rparen")
+        self.gridLayout.addWidget(self.btn_rparen, 1, 1, 1, 1)
+        self.btn_clear = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_clear.setObjectName("btn_clear")
+        self.gridLayout.addWidget(self.btn_clear, 1, 3, 1, 1)
+        self.btn_5 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_5.setMinimumSize(QtCore.QSize(0, 25))
+        self.btn_5.setObjectName("btn_5")
+        self.gridLayout.addWidget(self.btn_5, 3, 1, 1, 1)
+        self.btn_lparen = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_lparen.setObjectName("btn_lparen")
+        self.gridLayout.addWidget(self.btn_lparen, 1, 0, 1, 1)
+        self.btn_3 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_3.setObjectName("btn_3")
+        self.gridLayout.addWidget(self.btn_3, 4, 2, 1, 1)
+        self.btn_backspace = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_backspace.setObjectName("btn_backspace")
+        self.gridLayout.addWidget(self.btn_backspace, 1, 2, 1, 1)
+        self.btn_8 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_8.setObjectName("btn_8")
+        self.gridLayout.addWidget(self.btn_8, 2, 1, 1, 1)
+        self.btn_eq = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_eq.setObjectName("btn_eq")
+        self.gridLayout.addWidget(self.btn_eq, 9, 0, 1, 4)
+        self.btn_0 = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.btn_0.setObjectName("btn_0")
+        self.gridLayout.addWidget(self.btn_0, 8, 0, 1, 2)
+        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 617, 22))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(parent=MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
 
-    while True:
-        input_expression = input(f'Введите математическое выражение, пример: "2+(3*1)".\n- ')
-        if input_expression.lower() == "выход":
-            break  # Выходим из цикла, если пользователь ввел "выход"
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        # Создаем экземпляр калькулятора
+        self.calculator = Calculator()
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Калькулятор"))
+        self.btn_sub.setText(_translate("MainWindow", "-"))
+        self.btn_dot.setText(_translate("MainWindow", "."))
+        self.btn_9.setText(_translate("MainWindow", "9"))
+        self.btn_4.setText(_translate("MainWindow", "4"))
+        self.btn_1.setText(_translate("MainWindow", "1"))
+        self.btn_7.setText(_translate("MainWindow", "7"))
+        self.btn_add.setText(_translate("MainWindow", "+"))
+        self.btn_2.setText(_translate("MainWindow", "2"))
+        self.btn_6.setText(_translate("MainWindow", "6"))
+        self.btn_mul.setText(_translate("MainWindow", "*"))
+        self.btn_div.setText(_translate("MainWindow", "/"))
+        self.btn_rparen.setText(_translate("MainWindow", ")"))
+        self.btn_clear.setText(_translate("MainWindow", "C"))
+        self.btn_5.setText(_translate("MainWindow", "5"))
+        self.btn_lparen.setText(_translate("MainWindow", "("))
+        self.btn_3.setText(_translate("MainWindow", "3"))
+        self.btn_backspace.setText(_translate("MainWindow", "⇦"))
+        self.btn_8.setText(_translate("MainWindow", "8"))
+        self.btn_eq.setText(_translate("MainWindow", "="))
+        self.btn_0.setText(_translate("MainWindow", "0"))
+    
+    def btnf(self):
+        self.btn_0.clicked.connect(lambda: self.write_number("0"))
+        self.btn_1.clicked.connect(lambda: self.write_number("1"))
+        self.btn_2.clicked.connect(lambda: self.write_number("2"))
+        self.btn_3.clicked.connect(lambda: self.write_number("3"))
+        self.btn_4.clicked.connect(lambda: self.write_number("4"))
+        self.btn_5.clicked.connect(lambda: self.write_number("5"))
+        self.btn_6.clicked.connect(lambda: self.write_number("6"))
+        self.btn_7.clicked.connect(lambda: self.write_number("7"))
+        self.btn_8.clicked.connect(lambda: self.write_number("8"))
+        self.btn_9.clicked.connect(lambda: self.write_number("9"))
+        self.btn_sub.clicked.connect(lambda: self.write_number("-"))
+        self.btn_rparen.clicked.connect(lambda: self.write_number(")"))
+        self.btn_lparen.clicked.connect(lambda: self.write_number("("))
+        self.btn_mul.clicked.connect(lambda: self.write_number("*"))
+        self.btn_dot.clicked.connect(lambda: self.write_number("."))
+        self.btn_div.clicked.connect(lambda: self.write_number("/"))
+        self.btn_add.clicked.connect(lambda: self.write_number("+"))
+        self.btn_eq.clicked.connect(self.calculate_result)
+        self.btn_clear.clicked.connect(self.clear_label)
+        self.btn_backspace.clicked.connect(self.backspace)
+
+    def write_number(self, number):
+        self.label.setText(self.label.text() + number)
+
+    def calculate_result(self):
+        expression = self.label.text()
         try:
-            result = calc.calculate(input_expression)  # Вычисляем выражение
-            print(f"Результат: {result}")
+            result = self.calculator.calculate(expression)
+            self.label.setText(str(result))
         except Exception as e:
-            print(f"Ошибка: {e}")  # Обрабатываем ошибки
+            self.label.setText("Ошибка")
 
-    # Показываем историю перед выходом
-    calc.show_history()
+    def clear_label(self):
+        self.label.setText("")
+
+    def backspace(self):
+        current_text = self.label.text()
+        self.label.setText(current_text[:-1])
+
 
 if __name__ == "__main__":
-    main()
+    app = QApplication(sys.argv)  
+    MainWindow = QMainWindow()  
+    ui = Ui_MainWindow()  
+    ui.setupUi(MainWindow)  
+    MainWindow.show()  
+    ui.btnf()
+
+    sys.exit(app.exec())
